@@ -177,16 +177,6 @@
             margin: 15px 0;
         }
 
-        .status-list::before {
-            content: 'STATUS FLOW';
-            display: block;
-            font-size: 0.75em;
-            font-weight: 700;
-            color: #8b95a5;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-
         .status-list li {
             padding: 8px 0;
             padding-left: 25px;
@@ -903,16 +893,6 @@
             <h2 contenteditable="true">Customer Hub Experience</h2>
             <p style="color: #666; margin-bottom: 30px;" contenteditable="true">The single external-facing experience for Arbit V2</p>
             
-            <div class="highlight-box">
-                <h3 contenteditable="true">Visual Status Indicators</h3>
-                <div style="display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
-                    <div style="padding: 15px 25px; background: rgba(0, 255, 136, 0.15); border-radius: 8px; color: #00aa55; font-weight: 600; border: 1px solid rgba(0, 255, 136, 0.3);">Green = Complete</div>
-                    <div style="padding: 15px 25px; background: rgba(0, 72, 147, 0.15); border-radius: 8px; color: #004893; font-weight: 600; border: 1px solid rgba(0, 72, 147, 0.3);">Blue = Active</div>
-                    <div style="padding: 15px 25px; background: rgba(128, 128, 128, 0.1); border-radius: 8px; color: #666; font-weight: 600; border: 1px solid rgba(128, 128, 128, 0.3);">Gray = Pending</div>
-                    <div style="padding: 15px 25px; background: rgba(255, 80, 80, 0.15); border-radius: 8px; color: #cc0000; font-weight: 600; border: 1px solid rgba(255, 80, 80, 0.3);">Red = At Risk</div>
-                </div>
-            </div>
-
             <div class="grid-2" style="margin-top: 40px;">
                 <div>
                     <h3 contenteditable="true">Features</h3>
@@ -925,12 +905,11 @@
                     </ul>
                 </div>
                 <div>
-                    <h3 contenteditable="true">Integration</h3>
+                    <h3 contenteditable="true">Actions</h3>
                     <ul class="status-list">
-                        <li contenteditable="true">Sync with Snowflake</li>
-                        <li contenteditable="true">Power BI dashboards</li>
-                        <li contenteditable="true">Real-time data updates</li>
-                        <li contenteditable="true">Customer vs internal views</li>
+                        <li contenteditable="true">Build Customer Hub drill-downs (Claim → CPT → Event)</li>
+                        <li contenteditable="true">Sync Customer Hub data with Snowflake</li>
+                        <li contenteditable="true">Include customer-facing vs. internal status definitions</li>
                     </ul>
                 </div>
             </div>
