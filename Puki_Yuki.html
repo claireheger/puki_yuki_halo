@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puki Yuki Summary - Arbit V2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .slide {
+            background: #ffffff;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 72, 147, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 41, 104, 0.15);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #004893;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #002968;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #004893;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        h4 {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #FAA916;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .logo-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .grid-4 {
+            display: flex;
+            gap: 25px;
+            margin: 40px 0;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+
+        .grid-4::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .grid-4::-webkit-scrollbar-track {
+            background: rgba(0, 72, 147, 0.1);
+            border-radius: 4px;
+        }
+
+        .grid-4::-webkit-scrollbar-thumb {
+            background: rgba(250, 169, 22, 0.5);
+            border-radius: 4px;
+        }
+
+        .grid-4::-webkit-scrollbar-thumb:hover {
+            background: #FAA916;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(0, 72, 147, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-width: 320px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .card:nth-child(1)::before { background: #4A90E2; }
+        .card:nth-child(2)::before { background: #9B59B6; }
+        .card:nth-child(3)::before { background: #E91E63; }
+        .card:nth-child(4)::before { background: #26A69A; }
+        .card:nth-child(5)::before { background: #26A69A; }
+        .card:nth-child(6)::before { background: #E91E63; }
+        .card:nth-child(7)::before { background: #E91E63; }
+        .card:nth-child(8)::before { background: #FAA916; }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 72, 147, 0.15);
+        }
+
+        .card h4 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .card .meta {
+            font-size: 0.95em;
+            color: #5a6c7d;
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .card .meta span {
+            background: rgba(0, 72, 147, 0.08);
+            padding: 6px 14px;
+            border-radius: 6px;
+        }
+
+        .status-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .status-list::before {
+            content: 'STATUS FLOW';
+            display: block;
+            font-size: 0.75em;
+            font-weight: 700;
+            color: #8b95a5;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .status-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 0.95em;
+        }
+
+        .status-list li:before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            font-size: 1em;
+        }
+
+        .card:nth-child(1) .status-list li:before { color: #4A90E2; }
+        .card:nth-child(2) .status-list li:before { color: #9B59B6; }
+        .card:nth-child(3) .status-list li:before { color: #E91E63; }
+        .card:nth-child(4) .status-list li:before { color: #26A69A; }
+        .card:nth-child(5) .status-list li:before { color: #26A69A; }
+        .card:nth-child(6) .status-list li:before { color: #E91E63; }
+        .card:nth-child(7) .status-list li:before { color: #E91E63; }
+        .card:nth-child(8) .status-list li:before { color: #FAA916; }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .feature-list::before {
+            content: 'PRIORITY FEATURES';
+            display: block;
+            font-size: 0.75em;
+            font-weight: 700;
+            color: #8b95a5;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            color: #5a6c7d;
+            font-size: 0.9em;
+            font-weight: 400;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "•";
+            color: #8b95a5;
+            margin-right: 0;
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        .highlight-box {
+            background: rgba(0, 72, 147, 0.05);
+            border-left: 4px solid #FAA916;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .vs-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .vs-card {
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid;
+        }
+
+        .vs-card.v1 {
+            background: linear-gradient(135deg, rgba(150, 150, 150, 0.05) 0%, rgba(100, 100, 100, 0.08) 100%);
+            border-color: rgba(150, 150, 150, 0.3);
+        }
+
+        .vs-card.v2 {
+            background: linear-gradient(135deg, rgba(0, 72, 147, 0.05) 0%, rgba(250, 169, 22, 0.05) 100%);
+            border-color: rgba(250, 169, 22, 0.4);
+        }
+
+        .vs-card h3 {
+            font-size: 2em;
+            margin-bottom: 25px;
+        }
+
+        .vs-card.v1 h3 { color: #666; }
+        .vs-card.v2 h3 { color: #FAA916; }
+
+        .vs-card p {
+            margin: 15px 0;
+            color: #555;
+            font-weight: 400;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .tag.legacy {
+            background: rgba(150, 150, 150, 0.2);
+            color: #888;
+        }
+
+        .tag.modern {
+            background: rgba(250, 169, 22, 0.2);
+            color: #FAA916;
+        }
+
+        .timeline {
+            margin: 40px 0;
+        }
+
+        .timeline-item {
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(90deg, rgba(0, 72, 147, 0.08) 0%, transparent 100%);
+            border-left: 4px solid #FAA916;
+            border-radius: 8px;
+        }
+
+        .timeline-item h4 {
+            font-size: 1.5em;
+            color: #004893;
+            margin-bottom: 15px;
+        }
+
+        .timeline-item ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .timeline-item li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+            font-weight: 400;
+        }
+
+        .timeline-item li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #FAA916;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0, 72, 147, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 72, 147, 0.2);
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #004893;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            color: #666;
+            font-size: 0.9em;
+            font-weight: 400;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .icon-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(0, 72, 147, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 72, 147, 0.15);
+        }
+
+        .icon-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .icon-card h4 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #004893;
+        }
+
+        .icon-card p {
+            font-size: 0.9em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .photo-card {
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(0, 72, 147, 0.2);
+            aspect-ratio: 4/3;
+            background: rgba(0, 72, 147, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.9em;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .exceptions-box {
+            background: rgba(250, 169, 22, 0.08);
+            border: 2px solid rgba(250, 169, 22, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .exceptions-box h3 {
+            color: #004893;
+            margin-bottom: 15px;
+        }
+
+        .exceptions-box ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .exceptions-box li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            font-weight: 400;
+            color: #555;
+        }
+
+        .exceptions-box li:before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+            color: #FAA916;
+        }
+
+        [contenteditable="true"] {
+            outline: 1px dashed transparent;
+            padding: 2px;
+            transition: outline 0.2s;
+        }
+
+        [contenteditable="true"]:hover {
+            outline: 1px dashed rgba(250, 169, 22, 0.3);
+        }
+
+        [contenteditable="true"]:focus {
+            outline: 2px dashed #FAA916;
+            background: rgba(250, 169, 22, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            h2 {
+                font-size: 2em;
+            }
+            .grid-2, .vs-section {
+                grid-template-columns: 1fr;
+            }
+            .icon-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .card {
+                min-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Title Slide -->
+        <div class="slide">
+            <h1 contenteditable="true">Puki Yuki Summary</h1>
+            <p class="subtitle" contenteditable="true">Arbit V2 Roadmap & Strategy | October 8-9, 2025</p>
+            <div class="logo-section">
+                <div style="font-size: 1.2em; color: #666;" contenteditable="true">Hakkōda × HaloMD</div>
+            </div>
+        </div>
+
+        <!-- Objectives -->
+        <div class="slide">
+            <h2 contenteditable="true">Offsite Objectives</h2>
+            <div class="highlight-box">
+                <h3 contenteditable="true">Purpose</h3>
+                <p contenteditable="true">Define Arbit V2 roadmap, align on business process goals, and establish strategic direction</p>
+            </div>
+
+            <h3 contenteditable="true">Key Decisions</h3>
+            <div class="grid-2">
+                <div>
+                    <ul class="status-list">
+                        <li contenteditable="true">Customer Hub & Onboarding as top priority initiatives</li>
+                        <li contenteditable="true">VOB selected as first clean cutover to V2</li>
+                        <li contenteditable="true">Dual-level status tracking: claim-level (customer) + CPT-level (internal)</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="status-list">
+                        <li contenteditable="true">Legal Affairs process for post-award actions</li>
+                        <li contenteditable="true">V2 coexists with V1 via modular mini-apps</li>
+                        <li contenteditable="true">Data synchronization bridge between systems</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 contenteditable="true">Strategic Impact</h3>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value" contenteditable="true">200+</div>
+                    <div class="metric-label" contenteditable="true">Customers Annually</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" contenteditable="true">80%+</div>
+                    <div class="metric-label" contenteditable="true">Process Automation</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" contenteditable="true">Real-time</div>
+                    <div class="metric-label" contenteditable="true">Visibility</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- V1 vs V2 -->
+        <div class="slide">
+            <h2 contenteditable="true">Single Unified View</h2>
+            <div class="vs-section">
+                <div class="vs-card v1">
+                    <h3 contenteditable="true">Arbit V1</h3>
+                    <p contenteditable="true">Legacy system embedded via iframe</p>
+                    <p contenteditable="true">Remains operational during transition</p>
+                    <p contenteditable="true">Gradually phased out as V2 activates</p>
+                    <span class="tag legacy">Embedded • Legacy</span>
+                </div>
+                <div class="vs-card v2">
+                    <h3 contenteditable="true">Arbit V2</h3>
+                    <p contenteditable="true">New features activated progressively</p>
+                    <p contenteditable="true">Built-in workflow engine</p>
+                    <p contenteditable="true">Modern architecture with automation</p>
+                    <span class="tag modern">Progressive • Modern</span>
+                </div>
+            </div>
+
+            <div class="icon-grid">
+                <div class="icon-card">
+                    <div class="icon">🔐</div>
+                    <h4 contenteditable="true">RBAC</h4>
+                    <p contenteditable="true">Role-based access by persona</p>
+                </div>
+                <div class="icon-card">
+                    <div class="icon">⚙️</div>
+                    <h4 contenteditable="true">Workflow</h4>
+                    <p contenteditable="true">CPT-based flows integrated</p>
+                </div>
+                <div class="icon-card">
+                    <div class="icon">📋</div>
+                    <h4 contenteditable="true">Work Queue</h4>
+                    <p contenteditable="true">Smart alerts & task routing</p>
+                </div>
+                <div class="icon-card">
+                    <div class="icon">🤖</div>
+                    <h4 contenteditable="true">Automation</h4>
+                    <p contenteditable="true">Default automate, exception handle</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture with Exceptions -->
+        <div class="slide">
+            <h2 contenteditable="true">Arbit V2 Architecture</h2>
+            <p style="color: #666; margin-bottom: 30px;" contenteditable="true">Standardized process and automation framework with exception handling</p>
+            
+            <div class="grid-2">
+                <div class="highlight-box">
+                    <h3 contenteditable="true">Core Framework</h3>
+                    <ul class="feature-list">
+                        <li contenteditable="true">Phase: Major process step (e.g., Pre-Reg, Formal IDR)</li>
+                        <li contenteditable="true">Status: Current position (e.g., Initiated, Awarded, Paid)</li>
+                        <li contenteditable="true">Event Log: Timestamped actions for audit and automation</li>
+                        <li contenteditable="true">Branching logic at CPT level; claim-level summaries</li>
+                        <li contenteditable="true">95% automation target with exception-based routing</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3 contenteditable="true">Key Actions</h3>
+                    <ul class="feature-list">
+                        <li contenteditable="true">Map and standardize statuses across all domains</li>
+                        <li contenteditable="true">Align workflows and RBAC permissions to personas</li>
+                        <li contenteditable="true">Build workflow mockups showing statuses, tasks, events</li>
+                        <li contenteditable="true">Define branching logic and escalation rules</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exceptions-box">
+                <h3 contenteditable="true">Exceptions Handling</h3>
+                <ul>
+                    <li contenteditable="true">An estimated 5-10% of data in Arbit V1 is "bad" (duplicated, missing values, etc)</li>
+                    <li contenteditable="true">The V1 → V2 sync will write "bad" data to an exceptions schema</li>
+                    <li contenteditable="true">Business process will be developed to evaluate this data and determine if logic (soft rules) should be modified to include these records in the application schema</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Process Stages -->
+        <div class="slide">
+            <h2 contenteditable="true">Process Workflow</h2>
+            <p style="color: #666; margin-bottom: 10px;" contenteditable="true">Stage = Major business process section | Status = Current position within phase</p>
+            <p style="color: #8b95a5; font-size: 0.9em; margin-bottom: 30px;">← Scroll horizontally to view all stages →</p>
+            
+            <div class="grid-4">
+                <div class="card">
+                    <h4 contenteditable="true">Customer Onboarding</h4>
+                    <div class="meta">
+                        <span contenteditable="true">Q4 2024</span>
+                        <span contenteditable="true">Stacey</span>
+                    </div>
+                    <ul class="status-list">
+                        <li contenteditable="true">Data Testing</li>
+                        <li contenteditable="true">Contract Signed</li>
+                        <li contenteditable="true">Go Live</li>
+                    </ul>
+                    <ul class="feature-list">
+                        <li contenteditable="true">Pipeline tracker</li>
+                        <li contenteditable="true">CSM assignment</li>
+                        <li contenteditable="true">Task visibility</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4 contenteditable="true">Data Ingestion</h4>
+                    <div class="meta">
+                        <span contenteditable="true">Q1 2025</span>
+                        <span contenteditable="true">Dan</span>
+                    </div>
+                    <ul class="status-list">
+                        <li contenteditable="true">Pending</li>
+                        <li contenteditable="true">Processing</li>
+                        <li contenteditable="true">Complete/Error</li>
+                    </ul>
+                    <ul class="feature-list">
+                        <li contenteditable="true">Claim lineage ID</li>
+                        <li contenteditable="true">SFTP automation</li>
+                        <li contenteditable="true">60% → 100% fixes</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4 contenteditable="true">Pre-Registration (VOB & Doc Mgmt)</h4>
+                    <div class="meta">
+                        <span contenteditable="true">Q1 2025</span>
+                        <span contenteditable="true">Staysie</span>
+                    </div>
+                    <ul class="status-list">
+                        <li contenteditable="true">Pending</li>
+                        <li contenteditable="true">Verified</li>
+                        <li contenteditable="true">Ready</li>
+                    </ul>
+                    <ul class="feature-list">
+                        <li contenteditable="true">VOB</li>
+                        <li contenteditable="true">Exception queue</li>
+                        <li contenteditable="true">Document management</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4 contenteditable="true">Informal Negotiation</h4>
+                    <div class="meta">
+                        <span contenteditable="true">Q3 2025</span>
+                        <span contenteditable="true">Brandi</span>
+                    </div>
+                    <ul class="status-list">
+                        <li contenteditable="true">Initiated</li>
+                        <li contenteditable="true">Negotiating</li>
+                        <li contenteditable="true">No Response</li>
+                        <li contenteditable="true">Settled Informal</li>
+                    </ul>
+                    <ul class="feature-list">
+                        <li contenteditable="true">Email automation</li>
+                        <li contenteditable="true">Portal scraping</li>
+                        <li contenteditable="true">Payer behavior tracking</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4 contenteditable="true">NSA Formal</h4>
+                    <div class="meta">
+                        <span contenteditable="true">Q2 2025</span>
+                        <span contenteditable="true">Brandi</span>
+                    </div>
+                    <ul class="status-list">
+                        <li contenteditable="true">Initiated</li>
+                        <li contenteditable="true">Fees Paid</li>
+                        <li contenteditable="true">Brief Submitted</li>
+                        <li contenteditable="true">Awarded</li>
+                    </ul>
+                    <ul class="feature-list">
+                        <li contenteditable="true">Task checklist</li>
+                        <li contenteditable="true">Deadline alerts</li>
+                        <li contenteditable="true">Batch optimization</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4 contenteditable="true">Invoicing</h4>
+                    <div class="meta">
+                        <span contenteditable="true">Q2 2025</span>
+                        <span contenteditable="true">Staysie</span>
+                    </div>
+                    <ul class="status-list">
+                        <li contenteditable="true">Ready</li>
+                        <li contenteditable="true">Invoiced</li>
+                        <li contenteditable="true">Sent</li>
+                    </ul>
+                    <ul class="feature-list">
+                        <li contenteditable="true">CPT-level tracking</li>
+                        <li contenteditable="true">Pay-on-pay logic</li>
+                        <li contenteditable="true">Real-time updates</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4 contenteditable="true">Revenue Recovery</h4>
+                    <div class="meta">
+                        <span contenteditable="true">Q3 2025</span>
+                        <span contenteditable="true">Staysie</span>
+                    </div>
+                    <ul class="status-list">
+                        <li contenteditable="true">Not Paid</li>
+                        <li contenteditable="true">Under Recovery</li>
+                        <li contenteditable="true">Recovered</li>
+                    </ul>
+                    <ul class="feature-list">
+                        <li contenteditable="true">835 matching</li>
+                        <li contenteditable="true">Demand letters</li>
+                        <li contenteditable="true">CMS complaints</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4 contenteditable="true">Legal Affairs</h4>
+                    <div class="meta">
+                        <span contenteditable="true">Q4 2025</span>
+                        <span contenteditable="true">TBD</span>
+                    </div>
+                    <ul class="status-list">
+                        <li contenteditable="true">Under Review</li>
+                        <li contenteditable="true">TA Submitted</li>
+                        <li contenteditable="true">Closed</li>
+                    </ul>
+                    <ul class="feature-list">
+                        <li contenteditable="true">NIP analysis</li>
+                        <li contenteditable="true">Loss patterns</li>
+                        <li contenteditable="true">AI/ML categorization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CPT Status Strategy -->
+        <div class="slide">
+            <h2 contenteditable="true">Status Architecture</h2>
+            <div class="grid-2">
+                <div class="highlight-box" style="border-left-color: #004893;">
+                    <h3 contenteditable="true">CPT-Level Status (Internal)</h3>
+                    <p contenteditable="true">Granular tracking for each procedure code through workflow</p>
+                    <ul class="feature-list">
+                        <li contenteditable="true">Operations teams & analysts</li>
+                        <li contenteditable="true">Workflow automation triggers</li>
+                        <li contenteditable="true">Exception handling</li>
+                        <li contenteditable="true">Detailed reporting</li>
+                    </ul>
+                </div>
+                <div class="highlight-box" style="border-left-color: #FAA916;">
+                    <h3 contenteditable="true">Claim-Level Status (Customer)</h3>
+                    <p contenteditable="true">Summary view of overall claim progress</p>
+                    <ul class="feature-list">
+                        <li contenteditable="true">Business-friendly terminology</li>
+                        <li contenteditable="true">Percentage complete (e.g., 75%)</li>
+                        <li contenteditable="true">Avoid technical jargon</li>
+                        <li contenteditable="true">Drill-down to CPT details</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rollout Timeline -->
+        <div class="slide">
+            <h2 contenteditable="true">Phased Rollout</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4 contenteditable="true">Q1 2026 – Pilot & Foundation</h4>
+                    <ul>
+                        <li contenteditable="true">V2 core architecture live with V1 iframe</li>
+                        <li contenteditable="true">Customer Hub drill-downs & pipeline metrics</li>
+                        <li contenteditable="true">Initial RBAC roles and work queue alerts</li>
+                        <li contenteditable="true">VOB automation & Data Ingestion domain</li>
+                        <li contenteditable="true">Claim/CPT status hierarchy & QA Queue</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h4 contenteditable="true">Q2 2026 – Formal Workflow & Automation</h4>
+                    <ul>
+                        <li contenteditable="true">Full NSA Formal (IDR) workflow with fee tracking</li>
+                        <li contenteditable="true">Pay-on-Pay and Pay-on-Award invoicing</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h4 contenteditable="true">Q3 2026 – Expansion & Integration</h4>
+                    <ul>
+                        <li contenteditable="true">Revenue Recovery with Sage & CMS portals</li>
+                        <li contenteditable="true">Expand automation-exception logic</li>
+                        <li contenteditable="true">Multi-customer RCM group views</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h4 contenteditable="true">Q4 2026 – Optimization & AI Insights</h4>
+                    <ul>
+                        <li contenteditable="true">Fully deprecate V1 modules</li>
+                        <li contenteditable="true">Legal Affairs complaint tracking</li>
+                        <li contenteditable="true">"Why We Lost" AI classification</li>
+                        <li contenteditable="true">Event-driven reporting & trend analytics</li>
+                        <li contenteditable="true">AI-driven insights & predictive risk scoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Hub -->
+        <div class="slide">
+            <h2 contenteditable="true">Customer Hub Experience</h2>
+            <p style="color: #666; margin-bottom: 30px;" contenteditable="true">The single external-facing experience for Arbit V2</p>
+            
+            <div class="highlight-box">
+                <h3 contenteditable="true">Visual Status Indicators</h3>
+                <div style="display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
+                    <div style="padding: 15px 25px; background: rgba(0, 255, 136, 0.15); border-radius: 8px; color: #00aa55; font-weight: 600; border: 1px solid rgba(0, 255, 136, 0.3);">Green = Complete</div>
+                    <div style="padding: 15px 25px; background: rgba(0, 72, 147, 0.15); border-radius: 8px; color: #004893; font-weight: 600; border: 1px solid rgba(0, 72, 147, 0.3);">Blue = Active</div>
+                    <div style="padding: 15px 25px; background: rgba(128, 128, 128, 0.1); border-radius: 8px; color: #666; font-weight: 600; border: 1px solid rgba(128, 128, 128, 0.3);">Gray = Pending</div>
+                    <div style="padding: 15px 25px; background: rgba(255, 80, 80, 0.15); border-radius: 8px; color: #cc0000; font-weight: 600; border: 1px solid rgba(255, 80, 80, 0.3);">Red = At Risk</div>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top: 40px;">
+                <div>
+                    <h3 contenteditable="true">Features</h3>
+                    <ul class="status-list">
+                        <li contenteditable="true">Claim-level summary with KPIs</li>
+                        <li contenteditable="true">Drill-down to CPT-level details</li>
+                        <li contenteditable="true">Simplified customer-facing view</li>
+                        <li contenteditable="true">Configurable alerts for delays</li>
+                        <li contenteditable="true">Proactive Customer Success triggers</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 contenteditable="true">Integration</h3>
+                    <ul class="status-list">
+                        <li contenteditable="true">Sync with Snowflake</li>
+                        <li contenteditable="true">Power BI dashboards</li>
+                        <li contenteditable="true">Real-time data updates</li>
+                        <li contenteditable="true">Customer vs internal views</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Next Steps -->
+        <div class="slide">
+            <h2 contenteditable="true">What's Next</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h4 contenteditable="true">October 17, 2025</h4>
+                    <p style="color: #FAA916; font-size: 1.2em; margin: 15px 0; font-weight: 600;" contenteditable="true">Sales Demo Deployed</p>
+                </div>
+                <div class="card">
+                    <h4 contenteditable="true">November 7, 2025</h4>
+                    <p style="color: #004893; margin: 10px 0; font-weight: 500;" contenteditable="true">V2 Data Model Setup</p>
+                    <p style="color: #004893; margin: 10px 0; font-weight: 500;" contenteditable="true">Detailed Roadmap</p>
+                    <p style="color: #004893; margin: 10px 0; font-weight: 500;" contenteditable="true">Customer Hub Deployed</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 40px; text-align: center; border-left: none; border: 2px solid #FAA916;">
+                <h3 style="font-size: 1.8em; margin-bottom: 15px;" contenteditable="true">Cultures Merged</h3>
+                <p style="font-size: 1.1em; color: #555;" contenteditable="true">This wasn't just a planning session — it was a team-building moment that aligned everyone on where we're going and why it matters.</p>
+            </div>
+
+            <div class="photo-grid">
+                <div class="photo-card">📸 Team Photo 1<br><small>Click to add image</small></div>
+                <div class="photo-card">📸 Team Photo 2<br><small>Click to add image</small></div>
+                <div class="photo-card">📸 Team Photo 3<br><small>Click to add image</small></div>
+                <div class="photo-card">📸 Team Photo 4<br><small>Click to add image</small></div>
+                <div class="photo-card">📸 Team Photo 5<br><small>Click to add image</small></div>
+                <div class="photo-card">📸 Team Photo 6<br><small>Click to add image</small></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
